@@ -1,68 +1,53 @@
 import React, { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import { PostCard } from "../post-card";
 import { useGetPostsQuery } from "../../model";
 
 function PostsCardList() {
   const [postStart, setPostStart] = useState(0);
-  const [isMyFetchingDown, setIsFetchingDown] = useState(false);
-  const [isMyFetchingUp, setIsMyFetchingUp] = useState(false);
   const { data = {}, isLoading } = useGetPostsQuery({
     start: postStart,
   });
 
-  useEffect(() => {
-    if (isMyFetchingDown) {
-      setPostStart((prev) => {
-        return prev < 93 ? prev + 1 : prev;
-      });
-      setIsFetchingDown(false);
-    }
-  }, [isMyFetchingDown]);
+  const { ref: firstCard, inView: inViewFirstCard } = useInView({
+    threshold: 0,
+  });
+
+  const { ref: lastCard, inView: inViewLastCard } = useInView({
+    threshold: 0.5,
+  });
 
   useEffect(() => {
-    if (isMyFetchingUp) {
-      setPostStart((prev) => {
-        return prev > 0 ? prev - 1 : prev;
-      });
-      setIsMyFetchingUp(false);
+    if (inViewFirstCard) {
+      setPostStart((prev) => prev > 0 ? prev - 1 : prev);
     }
-  }, [isMyFetchingUp]);
-
-  const scrollHandler = (e) => {
-    if (e.target.documentElement.scrollTop < 100) {
-      setIsMyFetchingUp(true);
-    }
-    if (
-      e.target.documentElement.scrollHeight -
-        e.target.documentElement.scrollTop -
-        window.innerHeight <
-      40
-    ) {
-      setIsFetchingDown(true);
-      window.scrollTo(
-        0,
-        e.target.documentElement.scrollHeight +
-          e.target.documentElement.scrollTop
-      );
-    }
-  };
+  }, [inViewFirstCard]);
 
   useEffect(() => {
-    document.addEventListener("scroll", scrollHandler);
-    return () => {
-      document.removeEventListener("scroll", scrollHandler);
-    };
-  }, []);
+    if (inViewLastCard) {
+      setPostStart((prev) => prev + 1);
+    }
+  }, [inViewLastCard]);
 
   if (isLoading) return null;
 
   return (
     <div>
       <ul>
-        {data.map((post) => (
-          <li key={post.id}>
-            <PostCard post={post} />
-          </li>
+        {data.map((post, index, arr) => (
+          index === 0 ? (
+            <li key={post.id} ref={firstCard}>
+              <PostCard post={post} />
+            </li>
+          ) : index === arr.length - 1 ? (
+            <li key={post.id} ref={lastCard}>
+              <PostCard post={post} />
+            </li>
+          ) : (
+            <li key={post.id}>
+              <PostCard post={post} />
+            </li>
+          )
         ))}
       </ul>
     </div>
