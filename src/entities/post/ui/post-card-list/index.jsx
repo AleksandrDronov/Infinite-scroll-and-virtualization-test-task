@@ -4,7 +4,6 @@ import { useGetPostsQuery } from "../../model";
 
 function PostsCardList() {
   const [postStart, setPostStart] = useState(0);
-  console.log("postStart:", postStart)
   const [isMyFetchingDown, setIsFetchingDown] = useState(false);
   const [isMyFetchingUp, setIsMyFetchingUp] = useState(false);
   const { data = {}, isLoading } = useGetPostsQuery({

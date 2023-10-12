@@ -13,7 +13,7 @@ export const PostCard = ({ post }) => {
     <div className={styles.container}>
       <h2 className={styles.post_id} >№ {post.id}</h2>
       <h3 className={styles.title}>{post.title}</h3>
-      <p className="postitem__body">
+      <p>
         {post.body.length > 50 ? post.body.substring(0, 50) + "..." : post.body}
       </p>
       <Button onClick={buttonHandler}>

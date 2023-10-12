@@ -7,7 +7,6 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/:id" element={<PostPage />} />
-      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }

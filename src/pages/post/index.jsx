@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 
 function PostPage() {
   const { id } = useParams();
-  const { data: post, isLoading } = useGetPostByIdQuery(id);
+  const { data: post, isSuccess, isLoading } = useGetPostByIdQuery(id);
   const navigate = useNavigate();
 
   const buttonHandler = () => {
@@ -14,12 +14,13 @@ function PostPage() {
   };
 
   if (isLoading) return null;
+  if (!isSuccess) return "Страница не существует";
 
   return (
     <main className={styles.container}>
       <h1 className={styles.post_id}>№ {post.id}</h1>
       <h2 className={styles.title}>{post.title}</h2>
-      <p className="postitem__body">{post.body}</p>
+      <p>{post.body}</p>
       <Button onClick={buttonHandler}>Назад</Button>
     </main>
   );
