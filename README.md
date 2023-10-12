@@ -3,7 +3,7 @@
 [деплой](https://aleksandrdronov.github.io/test-task/)
 
 ### Используемые технологии:
-1. ReactJS, RTK Query
+1. ReactJS
 2. RTK Query
 3. React Router
 
