@@ -5,7 +5,7 @@ import { useGetPostsQuery } from "../../model";
 
 function PostsCardList() {
   const [postStart, setPostStart] = useState(0);
-  const { data = {}, isLoading } = useGetPostsQuery({
+  const { data = [] } = useGetPostsQuery({
     start: postStart,
   });
 
@@ -28,8 +28,6 @@ function PostsCardList() {
       setPostStart((prev) => prev + 1);
     }
   }, [inViewLastCard]);
-
-  if (isLoading) return null;
 
   return (
     <div>
