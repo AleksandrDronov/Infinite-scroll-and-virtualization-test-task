@@ -13,8 +13,8 @@ function PostPage() {
     navigate(-1);
   };
 
-  if (isLoading) return null;
-  if (!isSuccess) return "Страница не существует";
+  if (isLoading) return <h1>Loading...</h1>;
+  if (!isSuccess) return <h1>Страница не существует</h1>;
 
   return (
     <main className={styles.container}>
