@@ -11,11 +11,11 @@
 
 1. Клонировать репозиторий.
 
-   git clone git@github.com:AleksandrDronov/test-task.git
+   git clone git@github.com:AleksandrDronov/Infinite-scroll-and-virtualization-test-task.git
 
 2. Войти в папку проекта.
 
-   cd test-task
+   cd Infinite-scroll-and-virtualization-test-task
 
 3. Установить зависимости.
 

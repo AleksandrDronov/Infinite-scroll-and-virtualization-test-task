@@ -10,7 +10,7 @@ function PostsCardList() {
   });
 
   const { ref: firstCard, inView: inViewFirstCard } = useInView({
-    threshold: 0,
+    threshold: 0.5,
   });
 
   const { ref: lastCard, inView: inViewLastCard } = useInView({
