@@ -1,6 +1,6 @@
 # Тестовое задание. Бесконечный скролл + виртуализация
 
-[деплой](https://aleksandrdronov.github.io/test-task/)
+[деплой](https://aleksandrdronov.github.io/Infinite-scroll-and-virtualization-test-task/)
 
 ### Используемые технологии:
 1. ReactJS
